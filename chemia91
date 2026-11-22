@@ -1,0 +1,2004 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Химиялық тепе-теңдік | CHEMISTRY PRO</title>
+
+<style>
+:root{
+  --bg:#071725;
+  --panel:#12364d;
+  --panel2:#20526a;
+  --text:#f5fbff;
+  --blue:#9be4ff;
+  --green:#9df1c4;
+  --yellow:#ffe29c;
+  --red:#ff9eab;
+  --line:#81b5cb;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%}
+body{
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+}
+button,input{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.45;cursor:default}
+[hidden]{display:none!important}
+.app{
+  display:flex;
+  flex-direction:column;
+  height:100vh;
+  height:100dvh;
+  background:
+    radial-gradient(circle at 90% 8%,#159db055,transparent 45%),
+    radial-gradient(circle at 5% 95%,#15936b44,transparent 45%),
+    linear-gradient(125deg,#071725,#173f57,#081e30);
+}
+header,footer{
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 20px;
+  background:#081f30;
+}
+header{border-bottom:1px solid var(--line)}
+footer{border-top:1px solid var(--line)}
+.brand{
+  font-size:27px;
+  font-weight:900;
+  color:var(--blue);
+}
+.brand small{
+  display:block;
+  font-size:13px;
+  color:var(--yellow);
+  margin-top:4px;
+}
+.status{
+  display:flex;
+  align-items:center;
+  gap:17px;
+  font-size:19px;
+  font-weight:900;
+}
+#timer{
+  font-size:30px;
+  color:var(--yellow);
+  font-variant-numeric:tabular-nums;
+}
+#counter{color:var(--blue)}
+#clock{
+  font-size:21px;
+  font-weight:900;
+  color:var(--blue);
+  font-variant-numeric:tabular-nums;
+}
+.signature{
+  font-size:23px;
+  color:var(--yellow);
+  font-weight:900;
+}
+main{
+  flex:1;
+  min-height:0;
+  overflow:auto;
+  padding:25px 38px 55px;
+}
+.slide{
+  width:100%;
+  max-width:1510px;
+  min-height:100%;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+h1{
+  font-size:clamp(42px,4.5vw,76px);
+  line-height:1.14;
+  margin:10px 0 22px;
+}
+h2{
+  font-size:clamp(33px,3vw,52px);
+  line-height:1.2;
+  margin:0 0 20px;
+}
+h3{
+  font-size:clamp(25px,2vw,35px);
+  color:var(--blue);
+  margin:0 0 15px;
+}
+p,li{
+  font-size:clamp(22px,1.8vw,30px);
+  line-height:1.5;
+}
+li{margin-bottom:9px}
+.eyebrow{
+  color:var(--blue);
+  font-size:21px;
+  font-weight:900;
+  margin-bottom:14px;
+}
+.grid2,.grid3{
+  display:grid;
+  gap:19px;
+  align-items:center;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.grid3{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.card{
+  min-width:0;
+  padding:24px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,#1c4d66,#102d44);
+}
+.card p{margin:9px 0}
+.formula{
+  padding:20px;
+  margin:16px 0;
+  border:1px solid #8de2cd;
+  border-radius:14px;
+  background:#104752;
+  color:var(--green);
+  text-align:center;
+  font-size:clamp(27px,2.5vw,44px);
+  font-weight:900;
+  overflow-wrap:anywhere;
+}
+.note{
+  padding:19px 23px;
+  margin-top:18px;
+  background:#204860;
+  border-left:6px solid var(--yellow);
+  border-radius:12px;
+}
+.note p{margin:8px 0}
+.btn{
+  padding:13px 19px;
+  border:1px solid #94c4d8;
+  border-radius:11px;
+  background:#2d617e;
+  color:white;
+  font-size:18px;
+  font-weight:900;
+}
+.btn.primary{background:#087eab}
+.btn.good{background:#168361}
+.btn.gold{background:#8b6c36}
+.btn.danger{background:#a34455}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:11px;
+  margin-top:19px;
+}
+.task{
+  margin:11px 0;
+  padding:16px 20px;
+  background:#1c455e;
+  border:1px solid #84bdd3;
+  border-radius:12px;
+}
+.task p{margin:5px 0}
+.answer{
+  padding:20px;
+  margin-top:17px;
+  border:1px solid var(--green);
+  border-radius:13px;
+  background:#15513e;
+}
+.answer p{margin:9px 0}
+.big{
+  font-size:clamp(31px,3vw,48px);
+  font-weight:900;
+  line-height:1.4;
+}
+.tag{
+  display:inline-block;
+  width:max-content;
+  max-width:100%;
+  padding:12px 19px;
+  background:#695232;
+  border:2px solid var(--yellow);
+  color:var(--yellow);
+  border-radius:12px;
+  font-size:28px;
+  font-weight:900;
+}
+.progress{
+  height:15px;
+  margin:18px 0;
+  background:#34576e;
+  border-radius:25px;
+  overflow:hidden;
+}
+.progress span{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,#17b0d8,#a4efc7);
+}
+.team{
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#1b455c;
+  text-align:center;
+}
+.team.active{outline:4px solid var(--yellow)}
+.score{
+  font-size:56px;
+  font-weight:900;
+  color:var(--yellow);
+}
+.options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:18px;
+}
+.option{
+  padding:19px;
+  min-width:0;
+  background:#2d617f;
+  color:white;
+  border:2px solid var(--line);
+  border-radius:12px;
+  text-align:left;
+  font-size:clamp(20px,1.8vw,29px);
+  font-weight:900;
+}
+.option.correct{background:#14805b}
+.option.wrong{background:#9b4757}
+.yellow{color:var(--yellow)}
+.green{color:var(--green)}
+.blue{color:var(--blue)}
+.red{color:var(--red)}
+
+/* КӨРНЕКІЛІК */
+.visual{
+  padding:20px;
+  background:#103b50;
+  border:1px solid var(--line);
+  border-radius:18px;
+  text-align:center;
+}
+.visual svg{width:100%;height:235px}
+.visual strong{
+  font-size:29px;
+  color:var(--green);
+}
+.model-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.model-buttons .btn{
+  padding:16px 10px;
+  font-size:18px;
+}
+.model-buttons .selected{
+  background:#168061;
+  border:2px solid var(--yellow);
+}
+.shift-result{
+  padding:23px;
+  border:2px solid var(--line);
+  border-radius:15px;
+  background:#0c3a50;
+  text-align:center;
+}
+.shift-result strong{
+  display:block;
+  color:var(--yellow);
+  font-size:clamp(29px,2.6vw,44px);
+}
+.particles{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  min-height:120px;
+  margin-top:15px;
+  padding:18px;
+  background:#092d3d;
+  border-radius:13px;
+}
+.particle{
+  width:65px;
+  height:65px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:2px solid #a4e4f7;
+  background:#265770;
+  font-size:14px;
+  font-weight:900;
+}
+.particle.product{
+  background:#95546c;
+  border-color:#ffb6c2;
+}
+
+/* ҚҰРАЛДАР */
+.tools{
+  position:fixed;
+  left:10px;
+  bottom:95px;
+  z-index:40;
+  display:flex;
+  align-items:flex-start;
+  flex-direction:column;
+  gap:9px;
+}
+.tool{
+  padding:12px 13px;
+  background:#087f9e;
+  color:white;
+  border:1px solid #9dd8ed;
+  border-radius:9px;
+  font-size:14px;
+  font-weight:900;
+}
+
+/* КАЛЬКУЛЯТОР — БАРЛЫҚ ЖЕРІ ҚОЗҒАЛАДЫ */
+.calculator{
+  position:fixed;
+  z-index:160;
+  top:110px;
+  left:18px;
+  width:245px;
+  max-width:calc(100vw - 12px);
+  padding:11px;
+  border:2px solid #9de0f4;
+  border-radius:16px;
+  background:#103149;
+  box-shadow:0 20px 50px #0009;
+
+  /* Барлық бөлігінен қозғалту */
+  touch-action:none;
+  user-select:none;
+  cursor:grab;
+}
+.calculator.dragging{
+  cursor:grabbing;
+  border-color:var(--yellow);
+  box-shadow:0 25px 60px #000d;
+}
+.calculator *{
+  touch-action:none;
+  user-select:none;
+}
+.calc-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px;
+  gap:8px;
+  border-radius:8px;
+  background:#2b5872;
+  font-size:14px;
+}
+.calc-head button{
+  padding:6px 10px;
+  background:#a64959;
+  color:white;
+  border:0;
+  border-radius:6px;
+}
+#calcDisplay{
+  display:block;
+  width:100%;
+  height:49px;
+  padding:8px;
+  margin:10px 0;
+  color:white;
+  background:#061c2d;
+  border:1px solid var(--line);
+  border-radius:8px;
+  text-align:right;
+  font-size:23px;
+  pointer-events:none;
+}
+.calc-keys{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+}
+.calc-keys button{
+  min-width:0;
+  height:46px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#2c607b;
+  color:white;
+  font-size:19px;
+}
+.calc-hint{
+  padding-top:9px;
+  text-align:center;
+  color:#d7e8f0;
+  font-size:12px;
+}
+
+/* МЕНДЕЛЕЕВ КЕСТЕСІ */
+.overlay{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  display:grid;
+  place-items:center;
+  padding:10px;
+  background:#000d;
+}
+.modal{
+  width:min(1500px,99vw);
+  max-height:97vh;
+  overflow:auto;
+  padding:18px;
+  background:#0d2e45;
+  border:1px solid var(--line);
+  border-radius:15px;
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+.period-scroll{
+  overflow:auto;
+  padding:12px;
+  background:#071e30;
+  border-radius:12px;
+}
+.period{
+  display:grid;
+  grid-template-columns:65px repeat(18,87px);
+  grid-template-rows:38px repeat(10,85px);
+  gap:4px;
+  width:max-content;
+}
+.period-label{
+  display:grid;
+  place-items:center;
+  background:#1d4960;
+  color:var(--yellow);
+  border:1px solid var(--line);
+  border-radius:6px;
+  font-size:12px;
+  font-weight:900;
+}
+.element{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  padding:14px 2px 3px;
+  background:#2a607b;
+  color:white;
+  border:1px solid var(--line);
+  border-radius:6px;
+}
+.element i{
+  position:absolute;
+  left:4px;
+  top:3px;
+  font-size:11px;
+  font-style:normal;
+}
+.element b{font-size:25px}
+.element small{font-size:11px}
+.element.fblock{background:#347b81}
+.element.featured{background:#91556c}
+#elementInfo{
+  margin-top:13px;
+  padding:15px;
+  background:#1e4b63;
+  border-radius:9px;
+  font-size:20px;
+}
+@media(max-width:850px){
+  .grid2,.grid3,.options{
+    grid-template-columns:1fr;
+  }
+  main{padding:15px}
+  header,footer{padding:9px}
+  .brand{font-size:17px}
+  .brand small,#sectionName{display:none}
+  .status{gap:8px;font-size:13px}
+  #timer{font-size:21px}
+  #clock{font-size:15px}
+  .signature{font-size:14px}
+  .btn{font-size:14px;padding:10px}
+  .tools{bottom:78px}
+  .model-buttons .btn{font-size:15px}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header>
+  <div class="brand">
+    ⚗ CHEMISTRY PRO
+    <small>
+      ХИМИЯЛЫҚ ТЕПЕ-ТЕҢДІК · ЛЕ ШАТЕЛЬЕ ПРИНЦИПІ
+    </small>
+  </div>
+
+  <div class="status">
+    <span id="sectionName">Кіріспе</span>
+    <span id="timer">80:00</span>
+    <span id="counter">1 / 29</span>
+  </div>
+</header>
+
+<main id="main">
+  <section class="slide" id="slide"></section>
+</main>
+
+<footer>
+  <div class="actions" style="margin:0">
+    <button class="btn" id="prev">← Артқа</button>
+    <button class="btn primary" id="next">Келесі →</button>
+  </div>
+
+  <strong class="signature">BY DARKHAN</strong>
+  <span id="clock">00:00:00</span>
+</footer>
+
+</div>
+
+<div class="tools">
+  <button class="tool" id="showCalc">
+    🧮 Калькулятор
+  </button>
+  <button class="tool" id="showTable">
+    ⚛ Менделеев кестесі
+  </button>
+</div>
+
+<div class="calculator" id="calculator" hidden>
+  <div class="calc-head">
+    <strong>🧮 Калькулятор</strong>
+    <button id="closeCalc">✕</button>
+  </div>
+
+  <input id="calcDisplay" readonly>
+  <div class="calc-keys" id="calcKeys"></div>
+
+  <div class="calc-hint">
+    Кез келген жерінен ұстап жылжыт
+  </div>
+</div>
+
+<div class="overlay" id="tableOverlay" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Менделеев кестесі</h2>
+      <button class="btn" id="closeTable">Жабу ✕</button>
+    </div>
+
+    <p>118 элемент · 18 топ · 7 период</p>
+
+    <div class="period-scroll">
+      <div class="period" id="period"></div>
+    </div>
+
+    <div id="elementInfo">
+      Элементті таңда.
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* 1. БЕТТЕР МЕН НАВИГАЦИЯ */
+
+const $ = id => document.getElementById(id);
+const slides = [];
+let page = 0;
+
+function add(title, section, html) {
+  slides.push({title, section, html});
+}
+
+function dynamic(title, section, render) {
+  slides.push({title, section, render});
+}
+
+function draw() {
+  const s = slides[page];
+  if (!s) return;
+
+  $("slide").innerHTML = s.render ? s.render() : s.html;
+  $("sectionName").textContent = s.section;
+  $("counter").textContent = `${page + 1} / ${slides.length}`;
+  $("prev").disabled = page === 0;
+  $("next").disabled = page === slides.length - 1;
+  $("main").scrollTop = 0;
+}
+
+function go(title) {
+  const i = slides.findIndex(s => s.title === title);
+  if (i >= 0) {
+    page = i;
+    draw();
+  }
+}
+
+$("prev").onclick = () => {
+  if (page > 0) {
+    page--;
+    draw();
+  }
+};
+
+$("next").onclick = () => {
+  if (page < slides.length - 1) {
+    page++;
+    draw();
+  }
+};
+
+/* 2. САҚТАУ */
+
+const STORE = "darkhan_equilibrium_v2";
+
+function initialState() {
+  return {
+    factor:0,
+    levels:{},
+    oral:0,
+    oralShow:false,
+    game:0,
+    choice:null,
+    scores:[0,0,0],
+    home:false
+  };
+}
+
+let state = initialState();
+
+try {
+  const saved = JSON.parse(localStorage.getItem(STORE));
+  if (saved && Array.isArray(saved.scores) &&
+      saved.scores.length === 3) {
+    state = {...initialState(), ...saved};
+  }
+} catch(e) {
+  console.warn(e);
+}
+
+function save() {
+  try {
+    localStorage.setItem(STORE, JSON.stringify(state));
+  } catch(e) {
+    console.warn(e);
+  }
+}
+
+/* 3. КІРІСПЕ СУРЕТІ */
+
+function equilibriumDiagram() {
+  return `
+  <div class="visual">
+    <svg viewBox="0 0 560 245">
+      <g fill="#255670" stroke="#9ce4ff" stroke-width="4">
+        <circle cx="110" cy="105" r="55"/>
+        <circle cx="365" cy="105" r="42"/>
+        <circle cx="448" cy="105" r="42"/>
+      </g>
+
+      <g fill="white" font-size="27"
+         font-weight="bold" text-anchor="middle">
+        <text x="110" y="115">N₂O₄</text>
+        <text x="365" y="114">NO₂</text>
+        <text x="448" y="114">NO₂</text>
+      </g>
+
+      <g stroke="#ffdc92" stroke-width="6"
+         stroke-linecap="round">
+        <line x1="190" y1="90" x2="276" y2="90"/>
+        <line x1="190" y1="125" x2="276" y2="125"/>
+      </g>
+
+      <g fill="#ffdc92">
+        <polygon points="276,90 256,79 256,101"/>
+        <polygon points="190,125 210,114 210,136"/>
+      </g>
+
+      <text x="280" y="201"
+        fill="#9cf0c9" font-size="25"
+        font-weight="bold" text-anchor="middle">
+        ТУРА ⇌ КЕРІ
+      </text>
+    </svg>
+
+    <strong>Динамикалық тепе-теңдік</strong>
+    <p>
+      Тура және кері реакциялар
+      бір уақытта жүреді.
+    </p>
+  </div>`;
+}
+
+/* 4. КІРІСПЕ */
+
+dynamic("Кіріспе", "Кіріспе · 5 минут", () => `
+  <div class="grid2">
+    <div>
+      <div class="eyebrow">ХИМИЯ · 1-КУРС</div>
+
+      <h1>
+        Химиялық тепе-теңдік.
+        Тепе-теңдікке әсер ететін факторлар
+      </h1>
+
+      <p>
+        Қайтымды реакциялар, динамикалық тепе-теңдік,
+        Ле Шателье принципі, концентрация,
+        температура, қысым және катализатор.
+      </p>
+
+      <div class="formula">A + B ⇌ C + D</div>
+
+      <div class="actions">
+        <button class="btn good" data-act="start">
+          ▶ Сабақты бастау
+        </button>
+        <button class="btn gold" data-act="reset-time">
+          ↺ Таймерді жаңарту
+        </button>
+      </div>
+    </div>
+
+    ${equilibriumDiagram()}
+  </div>
+`);
+
+add("Сабақ мақсаты", "Кіріспе", `
+  <h2>Сабақтың мақсаты</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Білімдік мақсат</h3>
+      <p>
+        Қайтымды реакцияны, химиялық тепе-теңдікті,
+        тепе-теңдік константасын және
+        Ле Шателье принципін түсіну.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Практикалық мақсат</h3>
+      <p>
+        Концентрация, температура және қысым
+        өзгергенде тепе-теңдіктің ығысуын анықтау.
+        Тепе-теңдік константасы арқылы есептер шығару.
+      </p>
+    </div>
+  </div>
+
+  <div class="note">
+    <p>
+      Сабақ ұзақтығы — 80 минут.
+      Теория — 20 минут.
+      Конспект — 8 минут.
+      Деңгейлік жұмыс — 10 минут.
+      Жеке тапсырмалар — 20 минут.
+      Командалық ойын — 12 минут.
+      Кіріспе мен қорытынды — 10 минут.
+    </p>
+  </div>
+`);
+
+/* 5. 15 ТҮСІНДІРМЕ */
+
+const theory = [
+  [
+    "Қайтымды реакциялар",
+    "Қайтымды реакциялар белгілі жағдайларда тура және кері бағытта жүре алады. Тура реакция бастапқы заттардан өнімдер түзеді, ал кері реакция өнімдерден бастапқы заттарды түзеді. Мұндай реакция екі жақты көрсеткімен белгіленеді.",
+    "A + B ⇌ C + D",
+    "Қайтымды реакция екі бағытта жүреді."
+  ],
+  [
+    "Қайтымды және қайтымсыз реакциялар",
+    "Қайтымсыз деп белгілі жағдайда бір бағытта басым жүретін реакцияларды атаймыз. Қайтымды реакцияда тура және кері процестер қатар жүруі мүмкін. Қайтымдылықты нақты реакцияның жүру жағдайларын ескере отырып түсіндіреміз.",
+    "→ және ⇌",
+    "⇌ — қайтымды реакцияның белгісі."
+  ],
+  [
+    "Тура реакция",
+    "Тура реакцияда теңдеудің сол жағындағы бастапқы заттар оң жақтағы өнімдерге айналады. Бастапқы сәтте өнімдер өте аз болса, тура реакцияның жылдамдығы кері реакцияның жылдамдығынан жоғары болуы мүмкін.",
+    "A + B → C + D",
+    "Тура реакция өнімдердің түзілуіне бағытталады."
+  ],
+  [
+    "Кері реакция",
+    "Кері реакция кезінде оң жақтағы өнімдер сол жақтағы бастапқы заттарға айналады. Өнімдердің концентрациясы өзгерсе, кері реакцияның жылдамдығы да өзгеруі мүмкін. Тура және кері процестер химиялық тепе-теңдікті қалыптастырады.",
+    "C + D → A + B",
+    "Кері реакцияда өнімдерден бастапқы заттар түзіледі."
+  ],
+  [
+    "Химиялық тепе-теңдік",
+    "Химиялық тепе-теңдік — жабық жүйеде тура және кері реакциялардың жылдамдықтары теңесетін күй. Тепе-теңдік орнағанда заттардың концентрациялары уақыт бойынша тұрақты болады. Дегенмен реакциялар тоқтамайды.",
+    "v(тура) = v(кері)",
+    "Тепе-теңдік шарты: v(тура)=v(кері)."
+  ],
+  [
+    "Динамикалық тепе-теңдік",
+    "Тепе-теңдік динамикалық деп аталады. Себебі тура және кері реакциялар үнемі жүріп жатады, бірақ жылдамдықтары бірдей. Сондықтан жүйенің жалпы құрамы тұрақты болып қалады. Бұл реакция толық тоқтады дегенді білдірмейді.",
+    "Тура жылдамдық = Кері жылдамдық",
+    "Химиялық тепе-теңдік — динамикалық күй."
+  ],
+  [
+    "Тепе-теңдік константасы",
+    "Белгілі температурада тепе-теңдіктің құрамын тепе-теңдік константасы сипаттайды. aA+bB⇌cC+dD түріндегі реакция үшін концентрациялар арқылы қарапайым оқу формуласын жазуға болады. Формуладағы дәрежелер теңдеудегі коэффициенттерге сәйкес келеді.",
+    "Kc = [C]ᶜ[D]ᵈ / ([A]ᵃ[B]ᵇ)",
+    "Тепе-теңдік константасы реакцияның тепе-теңдік құрамын сипаттайды."
+  ],
+  [
+    "Ле Шателье принципі",
+    "Егер химиялық тепе-теңдікте тұрған жүйеге сыртқы әсер жасалса, жүйе сол әсерді әлсірететін бағытқа ығысады. Бұл принцип концентрация, қысым және температура өзгерістерінің әсерін түсіндіреді. Ығысу бағыты нақты реакцияға байланысты анықталады.",
+    "Сыртқы әсер → Оны әлсірететін бағыт",
+    "Ле Шателье принципі тепе-теңдік ығысуын болжайды."
+  ],
+  [
+    "Концентрацияның әсері",
+    "Тепе-теңдіктегі жүйеге бастапқы зат қосылса, жүйе оны жұмсайтын бағытқа ығысуы мүмкін. Ал өнімнің концентрациясы артса, оны жұмсауға бағытталған кері реакция қолайлы болады. Концентрацияны азайту да тепе-теңдікке әсер етеді.",
+    "Реагент ↑ → Өнімдер бағыты",
+    "Концентрация өзгерісі тепе-теңдік орнын өзгертуі мүмкін."
+  ],
+  [
+    "Қысымның әсері",
+    "Қысымның әсері газдық жүйелерде ерекше маңызды. Температура тұрақты кезде көлемді азайту арқылы қысымды арттырсақ, газ молекулаларының жалпы стехиометриялық саны аз бағыт қолайлы болады. Екі жақтағы газ молінің саны бірдей болса, қысым өзгерісі тепе-теңдікті ығыстырмайды.",
+    "Қысым ↑ → Газ молі аз жақ",
+    "Қысым әсерін газдардың коэффициенттері арқылы анықта."
+  ],
+  [
+    "Температураның әсері",
+    "Температура химиялық тепе-теңдік орнына және тепе-теңдік константасына әсер етеді. Температураны арттырғанда эндотермиялық бағыт, ал төмендеткенде экзотермиялық бағыт қолайлы болады. Сондықтан реакцияның жылу эффектісін білу маңызды.",
+    "Температура ↑ → Эндотермиялық бағыт",
+    "Температура артқанда жылу сіңіретін бағыт қолайлы."
+  ],
+  [
+    "Эндотермиялық реакциялар",
+    "Эндотермиялық реакция жылуды сіңіреді. Егер тура бағыт эндотермиялық болса, температураны арттыру сол бағытқа тепе-теңдіктің ығысуына ықпал етеді. Кері реакция осы жағдайда экзотермиялық болып саналады.",
+    "ΔH > 0",
+    "Эндотермиялық реакция жылуды сіңіреді."
+  ],
+  [
+    "Экзотермиялық реакциялар",
+    "Экзотермиялық реакция жылу бөледі. Егер тура реакция экзотермиялық болса, температураны төмендету өнімдер жағына ығысуға ықпал етуі мүмкін. Температураны арттыру кері эндотермиялық бағытты қолдайды.",
+    "ΔH < 0",
+    "Экзотермиялық реакцияда жылу бөлінеді."
+  ],
+  [
+    "Катализатордың әсері",
+    "Катализатор реакция жылдамдығына әсер етеді. Қайтымды реакцияда ол жүйенің тепе-теңдікке жетуін тездетуі мүмкін. Бірақ катализатор тепе-теңдіктің орнын өзгертпейді және белгілі температурадағы тепе-теңдік константасын өзгертпейді.",
+    "Катализатор → Тепе-теңдікке тез жету",
+    "Катализатор тепе-теңдікті оңға да, солға да ығыстырмайды."
+  ],
+  [
+    "Тепе-теңдіктің маңызы",
+    "Химиялық тепе-теңдік заңдылықтары өндірістегі, табиғаттағы және биологиялық жүйелердегі процестерді түсінуге көмектеседі. Олар реакция нәтижесіне әсер ететін жағдайларды салыстыруға және заттардың тепе-теңдік құрамын болжауға мүмкіндік береді.",
+    "Тепе-теңдік · Өндіріс · Табиғат",
+    "Химиялық тепе-теңдік көптеген процестерді түсіндіреді."
+  ]
+];
+
+theory.forEach((item,i) => {
+  add(item[0], `Түсіндірме ${i+1}/15`, `
+    <div class="eyebrow">ТҮСІНДІРМЕ ${i+1}/15</div>
+    <h2>${item[0]}</h2>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Толық түсіндірме</h3>
+        <p>${item[1]}</p>
+      </div>
+
+      <div class="card">
+        <h3>Негізгі формула</h3>
+        <div class="formula">${item[2]}</div>
+        <p>Формуланың химиялық мағынасын түсіндір.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <h3 class="yellow">Дәптерге жазып алыңдар</h3>
+      <p>${item[3]}</p>
+    </div>
+  `);
+});
+
+/* 6. ТЕПЕ-ТЕҢДІК МОДЕЛІ */
+
+const factors = [
+  {
+    name:"Температураны арттыру",
+    result:"ТЕПЕ-ТЕҢДІК ОҢҒА ЫҒЫСАДЫ",
+    reason:"N₂O₄ → 2NO₂ бағыты эндотермиялық. Температура жоғарылағанда осы бағыт қолайлы болады.",
+    left:2,right:6
+  },
+  {
+    name:"Температураны төмендету",
+    result:"ТЕПЕ-ТЕҢДІК СОЛҒА ЫҒЫСАДЫ",
+    reason:"Кері реакция экзотермиялық. Температура төмендегенде N₂O₄ түзілуі қолайлы болады.",
+    left:5,right:2
+  },
+  {
+    name:"Қысымды арттыру",
+    result:"ТЕПЕ-ТЕҢДІК СОЛҒА ЫҒЫСАДЫ",
+    reason:"Сол жақта 1 моль газ, оң жақта 2 моль газ бар. Көлем азайғанда газ молі аз жақ қолайлы болады.",
+    left:5,right:2
+  },
+  {
+    name:"Қысымды төмендету",
+    result:"ТЕПЕ-ТЕҢДІК ОҢҒА ЫҒЫСАДЫ",
+    reason:"Көлемді ұлғайту арқылы қысым төмендегенде газ молі көп жақ қолайлы болады.",
+    left:2,right:6
+  },
+  {
+    name:"N₂O₄ концентрациясын арттыру",
+    result:"ТЕПЕ-ТЕҢДІК ОҢҒА ЫҒЫСАДЫ",
+    reason:"Жүйе қосылған бастапқы затты жұмсауға ұмтылады.",
+    left:2,right:6
+  },
+  {
+    name:"NO₂ концентрациясын арттыру",
+    result:"ТЕПЕ-ТЕҢДІК СОЛҒА ЫҒЫСАДЫ",
+    reason:"Жүйе қосылған өнімді жұмсау бағытына ығысады.",
+    left:5,right:2
+  },
+  {
+    name:"Катализатор қосу",
+    result:"ТЕПЕ-ТЕҢДІК ОРНЫ ӨЗГЕРМЕЙДІ",
+    reason:"Катализатор тепе-теңдікке жетуді тездетуі мүмкін, бірақ тепе-теңдік құрамын өзгертпейді.",
+    left:3,right:3
+  }
+];
+
+dynamic(
+  "Интерактивті тепе-теңдік моделі",
+  "Интерактивті көрнекілік",
+  () => {
+    const f = factors[state.factor];
+
+    return `
+      <div class="eyebrow">ИНТЕРАКТИВТІ МОДЕЛЬ</div>
+      <h2>Тепе-теңдікті өзгертіп көр!</h2>
+      <div class="formula">N₂O₄(g) ⇌ 2NO₂(g)</div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Сыртқы әсерді таңда</h3>
+          <div class="model-buttons">
+            ${factors.map((item,i) => `
+              <button
+                class="btn ${state.factor === i ? "selected" : ""}"
+                data-act="factor"
+                data-i="${i}">
+                ${item.name}
+              </button>
+            `).join("")}
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Модель нәтижесі</h3>
+
+          <div class="shift-result">
+            <strong>${f.result}</strong>
+            <p>${f.reason}</p>
+          </div>
+
+          <div class="particles">
+            ${Array.from({length:f.left}, () =>
+              `<span class="particle">N₂O₄</span>`
+            ).join("")}
+
+            ${Array.from({length:f.right}, () =>
+              `<span class="particle product">NO₂</span>`
+            ).join("")}
+          </div>
+
+          <p style="font-size:17px">
+            Бұл шартты көрнекілік.
+            Дөңгелектер нақты концентрацияны
+            немесе молекула санын көрсетпейді.
+          </p>
+        </div>
+      </div>
+    `;
+  }
+);
+
+/* 7. ҮШ КОНСПЕКТ */
+
+const notes = [
+  [
+    "Қайтымды реакциялар және тепе-теңдік",
+    [
+      "Қайтымды реакция екі бағытта жүре алады.",
+      "Белгісі: ⇌.",
+      "Тура реакция: A+B→C+D.",
+      "Кері реакция: C+D→A+B.",
+      "Тепе-теңдікте v(тура)=v(кері).",
+      "Реакциялар тоқтамайды.",
+      "Тепе-теңдік динамикалық күй деп аталады."
+    ]
+  ],
+  [
+    "Ле Шателье принципі",
+    [
+      "Сыртқы әсер жасалса, жүйе оны әлсірететін бағытқа ығысады.",
+      "Реагент концентрациясы артса, оны жұмсайтын бағыт қолайлы.",
+      "Өнім концентрациясы артса, оны жұмсайтын бағыт қолайлы.",
+      "Газдық жүйеде қысым артса, газ молі аз жақ қолайлы.",
+      "Температура артса, эндотермиялық бағыт қолайлы.",
+      "Температура төмендесе, экзотермиялық бағыт қолайлы.",
+      "Катализатор тепе-теңдік орнын өзгертпейді."
+    ]
+  ],
+  [
+    "Тепе-теңдік константасы",
+    [
+      "Жалпы реакция: aA+bB⇌cC+dD.",
+      "Kc=[C]ᶜ[D]ᵈ/([A]ᵃ[B]ᵇ).",
+      "[A] — зат концентрациясының белгісі.",
+      "Дәреже стехиометриялық коэффициентке сәйкес келеді.",
+      "H₂+I₂⇌2HI үшін Kc=[HI]²/([H₂][I₂]).",
+      "Белгілі температурада Kc тұрақты болады.",
+      "Температура өзгерсе, Kc өзгеруі мүмкін.",
+      "Катализатор Kc мәнін өзгертпейді."
+    ]
+  ]
+];
+
+notes.forEach((item,i) => {
+  add(`Конспект ${i+1}`, "Конспект · 8 минут", `
+    <div class="eyebrow">ДӘПТЕРГЕ ЖАЗЫП АЛЫҢДАР</div>
+    <h2>Конспект №${i+1}</h2>
+    <h3>${item[0]}</h3>
+
+    <div class="card">
+      <ol>
+        ${item[1].map(x => `<li>${x}</li>`).join("")}
+      </ol>
+    </div>
+  `);
+});
+
+/* 8. ТӨРТ ДЕҢГЕЙЛІ ТАПСЫРМА */
+
+const levels = [
+  [
+    "1-деңгей. Негізгі анықтамалар",
+    [
+      ["Қайтымды реакция дегеніміз не?","Екі бағытта жүре алатын реакция."],
+      ["Тепе-теңдікте реакциялар тоқтай ма?","Жоқ, реакциялар жалғасады."],
+      ["Тепе-теңдік шартын жаз.","v(тура)=v(кері)."],
+      ["Қайтымды реакция белгісі?","⇌"]
+    ]
+  ],
+  [
+    "2-деңгей. Ле Шателье принципі",
+    [
+      ["Қысым артқанда газ молі аз жаққа ығысу неге байланысты?","Газдардың стехиометриялық коэффициенттерінің қосындысына."],
+      ["Экзотермиялық тура реакцияда температура артса, қай бағыт қолайлы?","Кері, эндотермиялық бағыт."],
+      ["Реагент концентрациясы артса, жүйе қалай жауап береді?","Оны жұмсайтын бағытқа ығысады."],
+      ["Катализатор тепе-теңдік орнын өзгерте ме?","Жоқ."]
+    ]
+  ],
+  [
+    "3-деңгей. Бағытты анықтау",
+    [
+      ["N₂O₄⇌2NO₂ жүйесінде қысым артса?","Солға."],
+      ["Осы жүйеде температура артса?","Оңға."],
+      ["N₂O₄ концентрациясы артса?","Оңға."],
+      ["NO₂ концентрациясы артса?","Солға."]
+    ]
+  ],
+  [
+    "4-деңгей. Есептер",
+    [
+      ["H₂+I₂⇌2HI үшін Kc өрнегін жаз.","Kc=[HI]²/([H₂][I₂])."],
+      ["[HI]=0,4; [H₂]=0,2; [I₂]=0,2 моль/л. Kc табыңдар.","Kc=0,4²/(0,2×0,2)=4."],
+      ["A+B⇌C үшін [A]=0,5; [B]=0,4; [C]=0,2. Kc?","Kc=0,2/(0,5×0,4)=1."],
+      ["A+B⇌C, Kc=9, [A]=[B]=1. [C] мәні?","[C]=9 моль/л."]
+    ]
+  ]
+];
+
+levels.forEach((item,i) => {
+  dynamic(`Деңгей ${i+1}`, "Деңгейлік жұмыс · 10 минут", () => `
+    <div class="eyebrow">ДЕҢГЕЙ ${i+1}/4</div>
+    <h2>${item[0]}</h2>
+
+    ${item[1].map((q,j) => `
+      <div class="task">
+        <p>${j+1}. ${q[0]}</p>
+      </div>
+    `).join("")}
+
+    <div class="actions">
+      <button class="btn gold" data-act="level" data-i="${i}">
+        ${state.levels[i] ? "Жауаптарды жасыру" : "Жауаптарды көру"}
+      </button>
+    </div>
+
+    ${state.levels[i] ? `
+      <div class="answer">
+        ${item[1].map((q,j) => `
+          <p>${j+1}. ${q[1]}</p>
+        `).join("")}
+      </div>
+    ` : ""}
+  `);
+});
+
+/* 9. 25 ЖЕКЕ СҰРАҚ */
+
+const oral = [
+  ["Қайтымды реакция қалай белгіленеді?","⇌"],
+  ["Тура реакция деген не?","Бастапқы заттардан өнімдердің түзілуі."],
+  ["Кері реакция деген не?","Өнімдерден бастапқы заттардың түзілуі."],
+  ["Химиялық тепе-теңдік деген не?","Тура және кері реакциялардың жылдамдықтары теңескен күй."],
+  ["Тепе-теңдік статикалық па?","Жоқ, динамикалық."],
+  ["Тепе-теңдік шартын жаз.","v(тура)=v(кері)."],
+  ["Ле Шателье принципі нені түсіндіреді?","Сыртқы әсерден тепе-теңдіктің ығысуын."],
+  ["Концентрация деген не?","Белгілі көлемдегі зат мөлшерін сипаттайтын шама."],
+  ["Реагент қосылса, жүйе қай бағытқа ығысады?","Оны жұмсайтын бағытқа."],
+  ["Өнім қосылса, не болады?","Өнімді жұмсайтын бағыт қолайлы болады."],
+  ["Қысым қай жүйелерге ерекше әсер етеді?","Газдық жүйелерге."],
+  ["Қысым артқанда қай жақ қолайлы?","Газ молі аз жақ."],
+  ["Қысым төмендегенде қай жақ қолайлы?","Газ молі көп жақ."],
+  ["Температура артқанда қай бағыт қолайлы?","Эндотермиялық бағыт."],
+  ["Температура төмендегенде қай бағыт қолайлы?","Экзотермиялық бағыт."],
+  ["Эндотермиялық реакция нені сіңіреді?","Жылуды."],
+  ["Экзотермиялық реакция нені бөледі?","Жылуды."],
+  ["Катализатор тепе-теңдікті ығыстыра ма?","Жоқ."],
+  ["Катализатор неге әсер етеді?","Реакция жылдамдығына."],
+  ["Kc нені сипаттайды?","Тепе-теңдік құрамын."],
+  ["Kc температураға тәуелді ме?","Иә."],
+  ["N₂O₄⇌2NO₂ жүйесінде қысым артса?","Солға."],
+  ["Осы жүйеде температура артса?","Оңға."],
+  ["[HI]=0,4, [H₂]=[I₂]=0,2 болса, Kc?","4."],
+  ["Тепе-теңдікті білу неге маңызды?","Химиялық процестерді түсіндіру және болжау үшін."]
+];
+
+dynamic("Жеке тапсырмалар", "25 оқушы · 20 минут", () => {
+  const i = state.oral;
+
+  if (i >= oral.length) {
+    return `
+      <h1>25 жеке тапсырма аяқталды!</h1>
+      <div class="actions">
+        <button class="btn gold" data-act="oral-reset">
+          ↺ Қайта бастау
+        </button>
+        <button class="btn primary" data-act="to-game">
+          Командалық ойын →
+        </button>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="eyebrow">ЖЕКЕ ТАПСЫРМА</div>
+    <h2>Тақтаға шығып жауап бер</h2>
+    <span class="tag">${i+1}-оқушы · ${i+1}/25</span>
+
+    <div class="progress">
+      <span style="width:${i*100/25}%"></span>
+    </div>
+
+    <div class="card">
+      <h3>Сұрақ</h3>
+      <p class="big">${oral[i][0]}</p>
+    </div>
+
+    ${state.oralShow ? `
+      <div class="answer">
+        <h3>Дұрыс жауап</h3>
+        <p>${oral[i][1]}</p>
+      </div>
+    ` : ""}
+
+    <div class="actions">
+      <button class="btn gold" data-act="oral-show">
+        ${state.oralShow ? "Жауапты жасыру" : "Жауапты көру"}
+      </button>
+
+      <button class="btn primary" data-act="oral-next">
+        Келесі оқушы →
+      </button>
+    </div>
+  `;
+});
+
+/* 10. 3 КОМАНДАЛЫҚ ОЙЫН */
+
+const quiz = [
+  ["Қайтымды реакция таңбасы?",["→","⇌","=","≈"],1],
+  ["Тепе-теңдікте қандай шарт орындалады?",["vтура=vкері","vтура=0","vкері=0","Реакция тоқтайды"],0],
+  ["Химиялық тепе-теңдік қандай күй?",["Статикалық","Тек газдық","Динамикалық","Механикалық"],2],
+  ["Ле Шателье принципі не туралы?",["Атом массасы","Электрон саны","Период нөмірі","Сыртқы әсерге жауап"],3],
+  ["Қысым артқанда газдық жүйеде қай жақ қолайлы?",["Газ молі аз","Газ молі көп","Әрқашан оң","Әрқашан сол"],0],
+  ["Температура артқанда қай бағыт қолайлы?",["Экзотермиялық","Эндотермиялық","Тек солға","Өзгермейді"],1],
+  ["Катализатор тепе-теңдік орнын өзгерте ме?",["Әрқашан оңға","Әрқашан солға","Жоқ","Тек қысымда"],2],
+  ["N₂O₄⇌2NO₂: қысым артса?",["Оңға","Өзгермейді","Бірдей","Солға"],3],
+  ["N₂O₄⇌2NO₂: температура артса?",["Оңға","Солға","Тоқтайды","Өзгермейді"],0],
+  ["NO₂ концентрациясы артса?",["Оңға","Солға","Өзгермейді","Тоқтайды"],1],
+  ["Эндотермиялық бағыт нені сіңіреді?",["Электронды","Массаны","Жылуды","Зарядты"],2],
+  ["Экзотермиялық бағыт нені бөледі?",["Протон","Электрон","Көміртек","Жылуды"],3],
+  ["Температура өзгерсе Kc өзгеруі мүмкін бе?",["Иә","Жоқ","Тек катализатормен","Тек суда"],0],
+  ["H₂+I₂⇌2HI үшін Kc өрнегі?",["[HI]/[H₂]","[HI]²/([H₂][I₂])","[H₂][I₂]","[HI]²"],1],
+  ["[HI]=0,4, [H₂]=[I₂]=0,2. Kc?",["2","8","4","1"],2]
+];
+
+dynamic("Командалық ойын", "3 команда · 12 минут", () => {
+  const i = state.game;
+
+  if (i >= quiz.length) {
+    const best = Math.max(...state.scores);
+    const winners = state.scores
+      .map((score,j) => score === best ? `${j+1}-команда` : null)
+      .filter(Boolean);
+
+    return `
+      <h1>Командалық ойын аяқталды!</h1>
+
+      <div class="grid3">
+        ${state.scores.map((score,j) => `
+          <div class="team">
+            <h3>${j+1}-команда</h3>
+            <div class="score">${score}</div>
+            <p>ұпай</p>
+          </div>
+        `).join("")}
+      </div>
+
+      <div class="note">
+        <p>Жеңімпаз: ${winners.join(", ")}</p>
+      </div>
+
+      <div class="actions">
+        <button class="btn gold" data-act="game-reset">
+          ↺ Қайта бастау
+        </button>
+      </div>
+    `;
+  }
+
+  const [q,options,right] = quiz[i];
+
+  return `
+    <div class="eyebrow">КОМАНДАЛЫҚ ОЙЫН ${i+1}/15</div>
+    <h2>${i%3+1}-команданың кезегі</h2>
+
+    <div class="grid3">
+      ${state.scores.map((score,j) => `
+        <div class="team ${j === i%3 ? "active" : ""}">
+          <h3>${j+1}-команда</h3>
+          <div class="score">${score}</div>
+        </div>
+      `).join("")}
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <p class="big">${q}</p>
+    </div>
+
+    <div class="options">
+      ${options.map((option,j) => `
+        <button
+          class="option ${
+            state.choice === null ? ""
+            : j === right ? "correct"
+            : j === state.choice ? "wrong" : ""
+          }"
+          data-act="answer"
+          data-i="${j}"
+          ${state.choice !== null ? "disabled" : ""}>
+          ${"ABCD"[j]}. ${option}
+        </button>
+      `).join("")}
+    </div>
+
+    ${state.choice !== null ? `
+      <div class="answer">
+        <h3>
+          ${state.choice === right
+            ? "Дұрыс! +10 ұпай"
+            : "Қате. 0 ұпай"}
+        </h3>
+        <p>Дұрыс жауап: ${options[right]}</p>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" data-act="game-next">
+          Келесі команда →
+        </button>
+      </div>
+    ` : ""}
+  `;
+});
+
+/* 11. ҮЙ ТАПСЫРМАСЫ */
+
+const homeResearch = [
+  [
+    "«Ле Шателье принципі» атты сызба жаса.",
+    "Концентрация, қысым және температура әсерін үш бөлек сызба арқылы көрсет."
+  ],
+  [
+    "«Катализатор және тепе-теңдік» салыстыру кестесін жаса.",
+    "Катализатордың реакция жылдамдығына, тепе-теңдік орнына және Kc мәніне әсерін салыстыр."
+  ]
+];
+
+const homeMath = [
+  [
+    "H₂+I₂⇌2HI, [HI]=0,6 моль/л, [H₂]=0,3 моль/л, [I₂]=0,2 моль/л. Kc тап.",
+    "Kc=0,6²/(0,3×0,2)=6."
+  ],
+  [
+    "A+B⇌C, Kc=5, [A]=0,4 моль/л, [B]=0,3 моль/л. [C] тап.",
+    "[C]=5×0,4×0,3=0,6 моль/л."
+  ]
+];
+
+dynamic("Үй тапсырмасы", "Үй жұмысы", () => `
+  <div class="eyebrow">ҮЙ ТАПСЫРМАСЫ</div>
+  <h2>«Химиялық тепе-теңдік зертханасы»</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>1. Теориялық зерттеу</h3>
+      ${homeResearch.map((q,i) => `
+        <div class="task">
+          <p>${i+1}. ${q[0]}</p>
+        </div>
+      `).join("")}
+    </div>
+
+    <div class="card">
+      <h3>2. Екі химиялық есеп</h3>
+      ${homeMath.map((q,i) => `
+        <div class="task">
+          <p>${i+1}. ${q[0]}</p>
+        </div>
+      `).join("")}
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn gold" data-act="home">
+      ${state.home ? "Жауаптарды жасыру" : "Жауаптарды көру"}
+    </button>
+  </div>
+
+  ${state.home ? `
+    <div class="answer">
+      <h3>Теориялық тапсырмалар</h3>
+      ${homeResearch.map((q,i) => `
+        <p>${i+1}. ${q[1]}</p>
+      `).join("")}
+
+      <h3>Есептердің шешуі</h3>
+      ${homeMath.map((q,i) => `
+        <p>${i+1}. ${q[1]}</p>
+      `).join("")}
+    </div>
+  ` : ""}
+`);
+
+/* 12. ҚОРЫТЫНДЫ */
+
+add("Қорытынды", "Сабақ аяқталды", `
+  <div style="text-align:center">
+    <div class="eyebrow">ХИМИЯ · 1-КУРС</div>
+    <h1>Сабақ аяқталды!</h1>
+    <h2>Химиялық тепе-теңдік</h2>
+
+    <div class="grid3">
+      <div class="card">
+        <h3>15 түсіндірме</h3>
+        <p>Тепе-теңдік және Ле Шателье принципі</p>
+      </div>
+      <div class="card">
+        <h3>25 тапсырма</h3>
+        <p>Жеке жұмыс</p>
+      </div>
+      <div class="card">
+        <h3>15 сұрақ</h3>
+        <p>3 команда</p>
+      </div>
+    </div>
+
+    <div class="formula">BY DARKHAN</div>
+  </div>
+`);
+
+/* 13. СЛАЙД БАТЫРМАЛАРЫ */
+
+$("slide").addEventListener("click", event => {
+  const b = event.target.closest("[data-act]");
+  if (!b) return;
+
+  const action = b.dataset.act;
+  const i = Number(b.dataset.i);
+
+  switch(action) {
+    case "start":
+      startTimer();
+      break;
+
+    case "reset-time":
+      resetTimer();
+      break;
+
+    case "factor":
+      state.factor = i;
+      break;
+
+    case "level":
+      state.levels[i] = !state.levels[i];
+      break;
+
+    case "oral-show":
+      state.oralShow = !state.oralShow;
+      break;
+
+    case "oral-next":
+      state.oral = Math.min(oral.length, state.oral+1);
+      state.oralShow = false;
+      break;
+
+    case "oral-reset":
+      state.oral = 0;
+      state.oralShow = false;
+      break;
+
+    case "to-game":
+      go("Командалық ойын");
+      break;
+
+    case "answer":
+      if (state.choice !== null) return;
+      if (i < 0 || i > 3) return;
+      state.choice = i;
+      if (i === quiz[state.game][2]) {
+        state.scores[state.game%3] += 10;
+      }
+      break;
+
+    case "game-next":
+      if (state.choice === null) return;
+      state.game++;
+      state.choice = null;
+      break;
+
+    case "game-reset":
+      state.game = 0;
+      state.choice = null;
+      state.scores = [0,0,0];
+      break;
+
+    case "home":
+      state.home = !state.home;
+      break;
+  }
+
+  save();
+  draw();
+});
+
+/* 14. 80 МИНУТТЫҚ ТАЙМЕР */
+
+const TIMER_KEY = STORE + "_timer";
+let deadline = null;
+
+try {
+  const saved = localStorage.getItem(TIMER_KEY);
+  if (saved !== null && Number.isFinite(Number(saved))) {
+    deadline = Number(saved);
+  }
+} catch(e) {
+  console.warn(e);
+}
+
+function tick() {
+  const seconds = deadline === null
+    ? 4800
+    : Math.max(0, Math.ceil((deadline-Date.now())/1000));
+
+  $("timer").textContent =
+    String(Math.floor(seconds/60)).padStart(2,"0") +
+    ":" +
+    String(seconds%60).padStart(2,"0");
+
+  $("clock").textContent =
+    new Intl.DateTimeFormat("en-GB",{
+      timeZone:"Asia/Almaty",
+      hour:"2-digit",
+      minute:"2-digit",
+      second:"2-digit",
+      hourCycle:"h23"
+    }).format(new Date());
+}
+
+function startTimer() {
+  if (deadline !== null) {
+    alert("Таймер іске қосылған.");
+    return;
+  }
+
+  deadline = Date.now() + 4800000;
+
+  try {
+    localStorage.setItem(TIMER_KEY, String(deadline));
+  } catch(e) {
+    console.warn(e);
+  }
+
+  tick();
+}
+
+function resetTimer() {
+  if (!confirm("80 минуттық таймерді жаңартамыз ба?")) return;
+  deadline = null;
+
+  try {
+    localStorage.removeItem(TIMER_KEY);
+  } catch(e) {
+    console.warn(e);
+  }
+
+  tick();
+}
+
+setInterval(tick,1000);
+
+/* 15. КАЛЬКУЛЯТОР */
+
+const calculator = $("calculator");
+
+$("showCalc").onclick = () => {
+  calculator.hidden = !calculator.hidden;
+  fitCalculator();
+};
+
+$("closeCalc").onclick = () => {
+  calculator.hidden = true;
+};
+
+const keys = [
+  "7","8","9","/",
+  "4","5","6","*",
+  "1","2","3","-",
+  "C","0",".","+",
+  "(",")","⌫","="
+];
+
+$("calcKeys").innerHTML = keys.map(k => `
+  <button type="button" data-key="${k}">
+    ${k === "/" ? "÷" : k === "*" ? "×" : k}
+  </button>
+`).join("");
+
+let calcText = "";
+
+function calculate(input) {
+  let i = 0;
+
+  function factor() {
+    if (input[i] === "+") {
+      i++;
+      return factor();
+    }
+
+    if (input[i] === "-") {
+      i++;
+      return -factor();
+    }
+
+    if (input[i] === "(") {
+      i++;
+      const value = sum();
+      if (input[i] !== ")") throw Error("Жақша қатесі");
+      i++;
+      return value;
+    }
+
+    const m = /^(?:\d+\.?\d*|\.\d+)/.exec(input.slice(i));
+    if (!m) throw Error("Сан қатесі");
+    i += m[0].length;
+    return Number(m[0]);
+  }
+
+  function product() {
+    let value = factor();
+
+    while (input[i] === "*" || input[i] === "/") {
+      const op = input[i++];
+      const next = factor();
+      value = op === "*" ? value*next : value/next;
+    }
+
+    return value;
+  }
+
+  function sum() {
+    let value = product();
+
+    while (input[i] === "+" || input[i] === "-") {
+      const op = input[i++];
+      const next = product();
+      value = op === "+" ? value+next : value-next;
+    }
+
+    return value;
+  }
+
+  if (!/^[0-9+*/().-]+$/.test(input)) {
+    throw Error("Таңба қатесі");
+  }
+
+  const result = sum();
+
+  if (i !== input.length || !Number.isFinite(result)) {
+    throw Error("Өрнек қатесі");
+  }
+
+  return Number(result.toPrecision(12));
+}
+
+$("calcKeys").addEventListener("click", event => {
+  const b = event.target.closest("[data-key]");
+  if (!b) return;
+
+  const k = b.dataset.key;
+
+  if (k === "C") {
+    calcText = "";
+  } else if (k === "⌫") {
+    calcText = calcText.slice(0,-1);
+  } else if (k === "=") {
+    try {
+      calcText = String(calculate(calcText));
+    } catch(e) {
+      calcText = "Қате";
+    }
+  } else {
+    if (calcText === "Қате") calcText = "";
+    calcText += k;
+  }
+
+  $("calcDisplay").value = calcText;
+});
+
+/* 16. КАЛЬКУЛЯТОРДЫ КЕЗ КЕЛГЕН
+   ЖЕРІНЕН ҰСТАП ҚОЗҒАЛТУ */
+
+function clamp(v,min,max) {
+  return Math.max(min,Math.min(max,v));
+}
+
+function fitCalculator() {
+  if (calculator.hidden) return;
+
+  const r = calculator.getBoundingClientRect();
+
+  calculator.style.left = clamp(
+    r.left,
+    0,
+    Math.max(0,window.innerWidth-r.width)
+  ) + "px";
+
+  calculator.style.top = clamp(
+    r.top,
+    0,
+    Math.max(0,window.innerHeight-r.height)
+  ) + "px";
+}
+
+let drag = null;
+let blockClickUntil = 0;
+
+/*
+  Pointerdown калькулятордың өзіне қойылған.
+  Сондықтан сан батырмалары, экран,
+  бос орындар және шеттері де ұсталады.
+
+  Pointer capture басылған нақты элементте
+  сақталады. Бұл жай басылған санның
+  click оқиғасын дұрыс жеткізеді.
+*/
+
+calculator.addEventListener("pointerdown", event => {
+  if (drag) return;
+
+  if (event.pointerType === "mouse" &&
+      event.button !== 0) return;
+
+  const r = calculator.getBoundingClientRect();
+
+  drag = {
+    id:event.pointerId,
+    target:event.target,
+    startX:event.clientX,
+    startY:event.clientY,
+    left:r.left,
+    top:r.top,
+    moved:false
+  };
+
+  if (typeof event.target.setPointerCapture === "function") {
+    event.target.setPointerCapture(event.pointerId);
+  }
+});
+
+calculator.addEventListener("pointermove", event => {
+  if (!drag || event.pointerId !== drag.id) return;
+
+  const dx = event.clientX-drag.startX;
+  const dy = event.clientY-drag.startY;
+
+  if (Math.hypot(dx,dy) > 5) {
+    drag.moved = true;
+  }
+
+  if (!drag.moved) return;
+
+  calculator.classList.add("dragging");
+
+  calculator.style.left = clamp(
+    drag.left+dx,
+    0,
+    Math.max(0,window.innerWidth-calculator.offsetWidth)
+  ) + "px";
+
+  calculator.style.top = clamp(
+    drag.top+dy,
+    0,
+    Math.max(0,window.innerHeight-calculator.offsetHeight)
+  ) + "px";
+});
+
+function stopDragging(event) {
+  if (!drag || event.pointerId !== drag.id) return;
+
+  if (drag.moved) {
+    blockClickUntil = performance.now()+400;
+  }
+
+  if (
+    drag.target &&
+    typeof drag.target.hasPointerCapture === "function" &&
+    drag.target.hasPointerCapture(event.pointerId)
+  ) {
+    drag.target.releasePointerCapture(event.pointerId);
+  }
+
+  drag = null;
+  calculator.classList.remove("dragging");
+}
+
+calculator.addEventListener("pointerup",stopDragging);
+calculator.addEventListener("pointercancel",stopDragging);
+
+/*
+  Калькулятор қозғалған соң
+  кездейсоқ сан немесе жабу
+  батырмасы басылып кетпейді.
+*/
+calculator.addEventListener("click",event => {
+  if (performance.now() >= blockClickUntil) return;
+
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  blockClickUntil = 0;
+},true);
+
+window.addEventListener("resize",fitCalculator);
+
+/* 17. МЕНДЕЛЕЕВ КЕСТЕСІ */
+
+const elementData = `
+H|Сутек He|Гелий Li|Литий Be|Бериллий B|Бор C|Көміртек N|Азот O|Оттек F|Фтор Ne|Неон
+Na|Натрий Mg|Магний Al|Алюминий Si|Кремний P|Фосфор S|Күкірт Cl|Хлор Ar|Аргон
+K|Калий Ca|Кальций Sc|Скандий Ti|Титан V|Ванадий Cr|Хром Mn|Марганец Fe|Темір Co|Кобальт Ni|Никель Cu|Мыс Zn|Мырыш Ga|Галлий Ge|Германий As|Мышьяк Se|Селен Br|Бром Kr|Криптон
+Rb|Рубидий Sr|Стронций Y|Иттрий Zr|Цирконий Nb|Ниобий Mo|Молибден Tc|Технеций Ru|Рутений Rh|Родий Pd|Палладий Ag|Күміс Cd|Кадмий In|Индий Sn|Қалайы Sb|Сурьма Te|Теллур I|Йод Xe|Ксенон
+Cs|Цезий Ba|Барий La|Лантан Ce|Церий Pr|Празеодим Nd|Неодим Pm|Прометий Sm|Самарий Eu|Еуропий Gd|Гадолиний Tb|Тербий Dy|Диспрозий Ho|Гольмий Er|Эрбий Tm|Тулий Yb|Иттербий Lu|Лютеций
+Hf|Гафний Ta|Тантал W|Вольфрам Re|Рений Os|Осмий Ir|Иридий Pt|Платина Au|Алтын Hg|Сынап Tl|Таллий Pb|Қорғасын Bi|Висмут Po|Полоний At|Астат Rn|Радон
+Fr|Франций Ra|Радий Ac|Актиний Th|Торий Pa|Протактиний U|Уран Np|Нептуний Pu|Плутоний Am|Америций Cm|Кюрий Bk|Берклий Cf|Калифорний Es|Эйнштейний Fm|Фермий Md|Менделевий No|Нобелий Lr|Лоуренсий
+Rf|Резерфордий Db|Дубний Sg|Сиборгий Bh|Борий Hs|Хассий Mt|Мейтнерий Ds|Дармштадтий Rg|Рентгений Cn|Коперниций Nh|Нихоний Fl|Флеровий Mc|Московий Lv|Ливерморий Ts|Теннессин Og|Оганесон
+`;
+
+const elements = elementData.trim()
+  .split(/\s+/)
+  .map((entry,i) => {
+    const [symbol,name] = entry.split("|");
+    return {z:i+1,symbol,name};
+  });
+
+const groups = [
+  [1,18],
+  [1,2,13,14,15,16,17,18],
+  [1,2,13,14,15,16,17,18],
+  Array.from({length:18},(_,i)=>i+1),
+  Array.from({length:18},(_,i)=>i+1)
+];
+
+function position(z) {
+  if (z <= 54) {
+    let k=z-1;
+    for (let p=0;p<5;p++) {
+      if (k < groups[p].length) {
+        return {row:p+1,col:groups[p][k]};
+      }
+      k-=groups[p].length;
+    }
+  }
+
+  if (z <= 56) return {row:6,col:z-54};
+  if (z <= 71) return {row:9,col:z-53};
+  if (z <= 86) return {row:6,col:z-68};
+  if (z <= 88) return {row:7,col:z-86};
+  if (z <= 103) return {row:10,col:z-85};
+  return {row:7,col:z-100};
+}
+
+function buildTable() {
+  let html="";
+
+  for (let g=1;g<=18;g++) {
+    html+=`
+      <span class="period-label"
+        style="grid-row:1;grid-column:${g+1}">
+        ${g}
+      </span>`;
+  }
+
+  for (let p=1;p<=7;p++) {
+    html+=`
+      <span class="period-label"
+        style="grid-row:${p+1};grid-column:1">
+        ${p}
+      </span>`;
+  }
+
+  html+=`
+    <span class="period-label"
+      style="grid-row:10;grid-column:1">La–Lu</span>
+    <span class="period-label"
+      style="grid-row:11;grid-column:1">Ac–Lr</span>
+    <span class="period-label"
+      style="grid-row:7;grid-column:4">57–71</span>
+    <span class="period-label"
+      style="grid-row:8;grid-column:4">89–103</span>
+  `;
+
+  for (const el of elements) {
+    const p=position(el.z);
+    const f=(el.z>=57&&el.z<=71) ||
+            (el.z>=89&&el.z<=103);
+    const featured=["H","N","O","C"].includes(el.symbol);
+
+    html+=`
+      <button
+        class="element ${f?"fblock":featured?"featured":""}"
+        data-z="${el.z}"
+        style="grid-row:${p.row+1};grid-column:${p.col+1}">
+        <i>${el.z}</i>
+        <b>${el.symbol}</b>
+        <small>${el.name}</small>
+      </button>
+    `;
+  }
+
+  $("period").innerHTML=html;
+}
+
+$("period").addEventListener("click",event=>{
+  const b=event.target.closest("[data-z]");
+  if(!b)return;
+
+  const z=Number(b.dataset.z);
+  const el=elements[z-1];
+  const p=position(z);
+
+  const period=p.row===9?6:p.row===10?7:p.row;
+  const group=p.row>7?"f-блок":p.col+"-топ";
+
+  $("elementInfo").textContent=
+    `${z}. ${el.name} (${el.symbol}) · `+
+    `${period}-период · ${group}`;
+});
+
+$("showTable").onclick=()=>{
+  $("tableOverlay").hidden=false;
+};
+
+$("closeTable").onclick=()=>{
+  $("tableOverlay").hidden=true;
+};
+
+$("tableOverlay").onclick=event=>{
+  if(event.target===$("tableOverlay")){
+    $("tableOverlay").hidden=true;
+  }
+};
+
+/* 18. ПЕРНЕТАҚТА БАСҚАРУЫ */
+
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"){
+    $("tableOverlay").hidden=true;
+    calculator.hidden=true;
+    return;
+  }
+
+  if(!$("tableOverlay").hidden)return;
+  if(event.target.closest("input,textarea"))return;
+
+  if(event.key==="ArrowRight"&&page<slides.length-1){
+    page++;
+    draw();
+  }else if(event.key==="ArrowLeft"&&page>0){
+    page--;
+    draw();
+  }
+});
+
+/* 19. БАСТАПҚЫ ТЕКСЕРУЛЕР */
+
+try {
+  const checks=[
+    [theory.length===15,"15 түсіндірме"],
+    [notes.length===3,"3 конспект"],
+    [levels.length===4,"4 деңгей"],
+    [oral.length===25,"25 жеке тапсырма"],
+    [quiz.length===15,"15 командалық сұрақ"],
+    [slides.length===29,"29 бет"],
+    [elements.length===118,"118 элемент"],
+    [calculate("7*3")===21,"Көбейту"],
+    [calculate("(2+3)*4")===20,"Жақша"],
+    [calculate("0.6*0.6/(0.3*0.2)")===6,"Kc есебі"]
+  ];
+
+  for(const [ok,name] of checks){
+    if(!ok)throw Error(name+" қатесі");
+  }
+
+  buildTable();
+  tick();
+  draw();
+
+  console.log("CHEMISTRY PRO: бастапқы тексерулер өтті");
+}catch(error){
+  console.error(error);
+  $("slide").textContent="Сайт қатесі: "+error.message;
+}
+</script>
+</body>
+</html>
